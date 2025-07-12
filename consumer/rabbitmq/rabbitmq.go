@@ -2,7 +2,6 @@ package rabbitmq
 
 import (
 	"time"
-	"os"
 
 	amqp "github.com/rabbitmq/amqp091-go"
 )
@@ -15,8 +14,7 @@ type RabbitMQ struct {
 var Rbmq RabbitMQ
 
 func NewRabbitMQ(url string) (*RabbitMQ, error) {
-	conn, err := amqp.Dial(os.Getenv("RABBITMQ_CONNECTION_URL"))
-	fmt.Println("=============================================>", os.Getenv("RABBITMQ_CONNECTION_URL"))
+	conn, err := amqp.Dial(url)
 	if err != nil {
 		return nil, err
 	}
