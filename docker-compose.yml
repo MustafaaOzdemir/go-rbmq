@@ -1,0 +1,19 @@
+version: "3.8"
+name: go-rbmq
+services:
+
+  go-rbmq-server:
+    build: ./server
+    container_name: go-rbmq-server
+    ports:
+      - "4200:4200"
+    environment:
+      RABBITMQ_CONNECTION_URL: amqp://guest:guest@rabbitMQ:5672/
+
+
+  go-rbmq-consumer:
+    build: ./consumer
+    container_name: go-rbmq-consumer
+    environment:
+      RABBITMQ_CONNECTION_URL: amqp://guest:guest@rabbitMQ:5672/
+

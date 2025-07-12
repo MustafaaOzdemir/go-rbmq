@@ -4,6 +4,7 @@ import (
 	"time"
 
 	amqp "github.com/rabbitmq/amqp091-go"
+	"os"
 )
 
 type RabbitMQ struct {
@@ -14,8 +15,7 @@ type RabbitMQ struct {
 var Rbmq RabbitMQ
 
 func NewRabbitMQ(url string) (*RabbitMQ, error) {
-	conn, err := amqp.Dial(url)
-	if err != nil {
+conn, err := amqp.Dial(url)	if err != nil {
 		return nil, err
 	}
 
