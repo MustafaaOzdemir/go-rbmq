@@ -2,7 +2,10 @@ package rabbitmq
 
 import (
 	"time"
+	"fmt"
+	"os"
 
+	"github.com/joho/godotenv"
 	amqp "github.com/rabbitmq/amqp091-go"
 )
 
@@ -13,7 +16,20 @@ type RabbitMQ struct {
 
 var Rbmq RabbitMQ
 
-func NewRabbitMQ(url string) (*RabbitMQ, error) {
+func NewRabbitMQ() (*RabbitMQ, error) {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error is occurred  on .env file please check")
+	}
+
+	user := os.Getenv("RBMQUSER")
+
+	password := os.Getenv("RBMQPASSWORD")
+
+
+	// set up postgres sql to open it.
+	url := fmt.Sprintf("amqp://%s:%s@localhost:5672/",
+		user, password)
 	conn, err := amqp.Dial(url)
 	if err != nil {
 		return nil, err

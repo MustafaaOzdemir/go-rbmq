@@ -17,7 +17,7 @@ const (
 
 func main() {
 	// Connect to RabbitMQ
-	rmq, err := rabbitmq.NewRabbitMQ("amqp://guest:guest@localhost:5672/")
+	rmq, err := rabbitmq.NewRabbitMQ()
 	if err != nil {
 		log.Fatal("Failed to connect to RabbitMQ:", err)
 	}
