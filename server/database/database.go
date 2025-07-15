@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
-	"strconv"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -19,16 +18,18 @@ func ConnectDatabase() {
 		fmt.Println("Error is occurred  on .env file please check")
 	}
 
-	host := os.Getenv("HOST")
-	port, _ := strconv.Atoi(os.Getenv("PORT"))
-	user := os.Getenv("USER")
-	dbname := os.Getenv("DB_NAME")
-	fmt.Println("dbname", dbname)
-	pass := os.Getenv("PASSWORD")
 
 	// set up postgres sql to open it.
-	psqlSetup := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=disable",
-		host, port, user, dbname, pass)
+	psqlSetup := fmt.Sprintf(
+		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("HOST"),
+		os.Getenv("PORT"), 
+		os.Getenv("USER"),  // This MUST match your .env
+		os.Getenv("PASSWORD"),
+		os.Getenv("DB_NAME"),
+	)
+	
+	fmt.Println("Connection string:", psqlSetup) // Debug output
 	db, errSql := sql.Open("postgres", psqlSetup)
 	if errSql != nil {
 		fmt.Println("There is an error while connecting to the database ", err)
