@@ -24,7 +24,7 @@ func ConnectDatabase() {
 		"host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("HOST"),
 		os.Getenv("PORT"), 
-		os.Getenv("USER"),  // This MUST match your .env
+		os.Getenv("DB_USER"),
 		os.Getenv("PASSWORD"),
 		os.Getenv("DB_NAME"),
 	)
